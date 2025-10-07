@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Alexandria">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../Alexandria/target/Alexandria.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
