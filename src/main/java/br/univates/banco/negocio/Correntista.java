@@ -70,4 +70,9 @@ public class Correntista implements Comparable<Correntista>
 
         return ok;
     }
+
+    @Override
+    public String toString() {
+        return nome + " : " + cpf.getNumeroCpf();
+    }
 }

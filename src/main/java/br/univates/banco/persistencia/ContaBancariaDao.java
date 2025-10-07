@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ContaBancariaDao {
-    private static ArrayList<ContaBancaria> listaContas;
+    private static ArrayList<ContaBancaria> listaContas = new ArrayList<ContaBancaria>();
 
     public ContaBancariaDao() {
         if (listaContas == null) {

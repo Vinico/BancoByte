@@ -24,7 +24,7 @@ public class TelaCadastroCorrentista
                 nome = Entrada.leiaString("Nome: ",nome);
                 cidade = Entrada.leiaString("Cidade: ",cidade);
 
-                Correntista c = new Correntista( new Cpf(cpf), nome, cidade );
+                Correntista c = new Correntista( new Cpf(cpf, true), nome, cidade );
 
                 CorrentistaDao dao = new CorrentistaDao();
                 dao.create(c);

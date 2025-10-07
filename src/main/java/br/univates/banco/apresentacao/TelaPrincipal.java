@@ -28,30 +28,12 @@ public class TelaPrincipal {
     public void exibir() {
         Menu m = new Menu();
 
-        m.addItem(new MenuItem('1', "Conta de Ivo Lima") {
-            @Override
-            public void executar() {
-                ContaBancariaDao dao = new ContaBancariaDao();
-                TelaContaBancaria tela = new TelaContaBancaria(dao.read(1));
-                tela.exibir();
-            }
-        });
 
-        m.addItem(new MenuItem('2', "Conta de Dalva Oliveira") {
+        m.addItem(new MenuItem('y', "Cadastrar Conta") {
             @Override
             public void executar() {
-                ContaBancariaDao dao = new ContaBancariaDao();
-                TelaContaBancaria tela = new TelaContaBancaria(dao.read(2));
-                tela.exibir();
-            }
-        });
-
-        m.addItem(new MenuItem('3', "Conta de Carlos Pichinini") {
-            @Override
-            public void executar() {
-                ContaBancariaDao dao = new ContaBancariaDao();
-                TelaContaBancaria tela = new TelaContaBancaria(dao.read(3));
-                tela.exibir();
+                TelaCadastro tc = new TelaCadastro();
+                tc.exibir();
             }
         });
 

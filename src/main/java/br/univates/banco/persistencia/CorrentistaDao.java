@@ -7,7 +7,7 @@ import java.util.Collections;
 
 public class CorrentistaDao
 {
-    private static ArrayList<Correntista> listaCorrentistas;
+    private static ArrayList<Correntista> listaCorrentistas = new ArrayList<Correntista>();
 
     public CorrentistaDao()
     {
