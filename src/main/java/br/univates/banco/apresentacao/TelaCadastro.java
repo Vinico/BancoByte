@@ -27,13 +27,14 @@ public class TelaCadastro {
             System.out.println("Correntistas Disponiveis:");
 
             for (Correntista corre: listaCorrentisas) {
-                if(contaDao.checkCorrentista(corre.getCpf())){
+                if (!contaDao.checkCorrentista(corre.getCpf())) {
                     System.out.println(corre.toString());
                 }
             }
 
-            cpfCorre = Entrada.leiaString("Digite o CPF do correntista a ser cadastrado", cpfCorre);
-            if (contaDao.checkCorrentista(new Cpf(cpfCorre))){
+            cpfCorre = Entrada.leiaString("Digite o CPF do correntista a ser cadastrado");
+            Cpf cpfo = new Cpf(cpfCorre);
+            if (!contaDao.checkCorrentista(cpfo)){
                 int tipoConta = Entrada.leiaInt("Escolha o tipo de conta [1] Normal | [2] Especial");
                 if (tipoConta != 1 && tipoConta != 2){
                     throw new TipoInvalidoException();

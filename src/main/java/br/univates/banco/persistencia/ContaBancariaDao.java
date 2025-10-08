@@ -43,7 +43,7 @@ public class ContaBancariaDao {
 
     public boolean checkCorrentista(Cpf cpf) {
         for (ContaBancaria conta : listaContas) {
-            if (conta.getCorrentista().getCpf() == cpf) {
+            if (conta.getCorrentista().getCpf().getNumeroCpf().equals(cpf.getNumeroCpf()) ) {
                  return true;
             }
         }
