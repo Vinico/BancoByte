@@ -1,15 +1,21 @@
 package br.univates.banco.negocio;
 
+import br.univates.alexandria.Entrada;
+
+import java.util.ArrayList;
+
 public class ContaBancaria implements Comparable<ContaBancaria>
 {
     private int numero;
     private Correntista correntista;
     protected double saldo;
+    private ArrayList<Transacao> transacoes;
     
     private static int sequencial = 0;
 
     public ContaBancaria(Correntista correntista)
     {
+        transacoes = new ArrayList<>();
         this.numero = ++sequencial;
         this.correntista = correntista;
         this.saldo = 0;
@@ -21,7 +27,12 @@ public class ContaBancaria implements Comparable<ContaBancaria>
     }
     
     
-    
+    public void showExtrato()
+    {
+        for (Transacao transacao : transacoes){
+            System.out.println(transacao.getTransacao());
+        }
+    }
     
     public ContaBancaria(int numero, Correntista correntista, double saldo)
     {
@@ -48,6 +59,18 @@ public class ContaBancaria implements Comparable<ContaBancaria>
     public double getSaldo()
     {
         return saldo;
+    }
+
+    public void makeTransacao(){
+        String dest = Entrada.leiaString("Informe o destinatario: ");
+        int tipo = Entrada.leiaInt("Digite o tipo de transação [0] Crédito [1] Débito: ");
+
+        double valor = Entrada.leiaDouble("Digite o valor: ");
+
+        String descricao = Entrada.leiaString("Digite a descrição: ");
+        Transacao tran = new Transacao(descricao, valor, tipo, dest);
+        transacoes.add(tran);
+
     }
 
     public void depositar(double valor) throws ValorNegativoException

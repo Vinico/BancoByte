@@ -42,10 +42,12 @@ public class TelaCadastro {
                 if(tipoConta == 1){
                     ContaBancaria contaAdd = new ContaBancaria(dao.read(new Cpf(cpfCorre)));
                     contaDao.create(contaAdd);
+                    repetir = false;
                 }
                 if(tipoConta == 2){
                     ContaBancaria contaAdd = new ContaBancariaEspecial(dao.read(new Cpf(cpfCorre)));
                     contaDao.create(contaAdd);
+                    repetir = false;
                 }
             }
 

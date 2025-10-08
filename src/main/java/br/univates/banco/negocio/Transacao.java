@@ -1,8 +1,9 @@
 package br.univates.banco.negocio;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Transacao {
+public class Transacao implements Comparable<Transacao>{
 
     private LocalDateTime dataTransacao;
     private String descricao;
@@ -20,6 +21,26 @@ public class Transacao {
         this.destinatario = destinatario;
     }
 
+    public LocalDateTime getDataTransacao() {
+        return dataTransacao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public String getDestinatario() {
+        return destinatario;
+    }
+
     public String getTransacao(){
         String retorno = "";
         if(tipo == 1){
@@ -34,4 +55,9 @@ public class Transacao {
         return retorno;
     }
 
+
+    @Override
+    public int compareTo(Transacao o) {
+        return dataTransacao.compareTo(o.dataTransacao);
+    }
 }
