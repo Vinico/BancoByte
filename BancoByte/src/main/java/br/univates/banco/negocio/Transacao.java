@@ -38,4 +38,8 @@ public class Transacao
         
     }
 
+    @Override
+    public String toString() {
+
+    }
 }
