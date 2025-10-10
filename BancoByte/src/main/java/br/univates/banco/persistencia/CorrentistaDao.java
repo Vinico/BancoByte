@@ -2,12 +2,15 @@ package br.univates.banco.persistencia;
 
 import br.univates.alexandria.Arquivo;
 import br.univates.alexandria.Cpf;
+import br.univates.alexandria.InvalidEntryException;
 import br.univates.banco.negocio.Correntista;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class CorrentistaDao
 {
+    private final String path = "db\\correntista.dat";
+
     public CorrentistaDao()
     {
     
@@ -20,7 +23,7 @@ public class CorrentistaDao
         listaCorrentistas.add(correntista);
         
         // salvar em arquivo texto
-        Arquivo a = new Arquivo("correntista.dat");
+        Arquivo a = new Arquivo(path);
         if (a.abrirEscrita())
         {
             for (Correntista c: listaCorrentistas)
@@ -52,10 +55,29 @@ public class CorrentistaDao
     
     public ArrayList<Correntista> readAll()
     {
-        //Collections.sort(listaCorrentistas);
-        //return listaCorrentistas;
-        return null;
+        ArrayList<Correntista> listaCorrentistas = new ArrayList<>();
+        Arquivo a = new Arquivo(path);
+        a.abrirLeitura();
+
+
+        String linha = a.lerLinha();
+        while (linha != null) {
+            if (!linha.isEmpty()) {
+                String[] splis = linha.split(";");
+                try {
+                    listaCorrentistas.add(new Correntista(new Cpf(splis[0], true), splis[1], splis[2]));
+                } catch (InvalidEntryException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            linha = a.lerLinha();
+        }
+
+        a.fecharArquivo();
+        return listaCorrentistas;
     }
+
+
     
     
 }

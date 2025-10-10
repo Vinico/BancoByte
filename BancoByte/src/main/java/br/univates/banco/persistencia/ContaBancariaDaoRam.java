@@ -1,22 +1,20 @@
 package br.univates.banco.persistencia;
 
-import br.univates.alexandria.Arquivo;
-import br.univates.alexandria.Cpf;
-import br.univates.alexandria.InvalidEntryException;
 import br.univates.banco.negocio.ContaBancaria;
-import br.univates.banco.negocio.Correntista;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ContaBancariaDao
+public class ContaBancariaDaoRam
 {
-    ArrayList<ContaBancaria> listaContas = new ArrayList<>();
-    private final String path = "db\\contabancaria.dat";
+    private static ArrayList<ContaBancaria> listaContas;
 
-    public ContaBancariaDao()
+    public ContaBancariaDaoRam()
     {
-
+        if (listaContas == null)
+        {
+            listaContas = new ArrayList();
+        }
     }
     
     /*
@@ -54,24 +52,7 @@ public class ContaBancariaDao
     
     public ArrayList<ContaBancaria> readAll()
     {
-        ArrayList<ContaBancaria> listaContas = new ArrayList<ContaBancaria>();
-        Arquivo a = new Arquivo(path);
-        a.abrirLeitura();
-
-
-        String linha = a.lerLinha();
-        while (linha != null) {
-            if (!linha.isEmpty()) {
-                String[] splis = linha.split(";");
-                Arquivo t = new Arquivo();
-                listaContas.add(new ContaBancaria());
-            }
-            linha = a.lerLinha();
-        }
-
-        a.fecharArquivo();
+        Collections.sort(listaContas);
         return listaContas;
     }
-
-
 }

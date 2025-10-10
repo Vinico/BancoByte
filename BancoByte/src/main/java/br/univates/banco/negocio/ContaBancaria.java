@@ -119,5 +119,9 @@ public class ContaBancaria implements Comparable<ContaBancaria>
     {
         return (this.numero - outraConta.numero);
     }
-    
+
+    @Override
+    public String toString() {
+        return numero + ";" + correntista.toString() + ";" + saldo + ";";
+    }
 }
