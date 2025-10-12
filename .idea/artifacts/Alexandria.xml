@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="Alexandria">
-    <output-path>$PROJECT_DIR$/Alexandria/target</output-path>
-    <root id="archive" name="Alexandria.jar">
-      <element id="module-output" name="Alexandria" />
-    </root>
-  </artifact>
-</component>

@@ -24,10 +24,18 @@ public class Transacao
         this.tipoOperacao = tipoOperacao;
         this.saldo = saldo;
     }
-    
+
+    public Transacao(LocalDate data, String descricao, double valor, char tipoOperacao, double saldo) {
+        this.data = data;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.tipoOperacao = tipoOperacao;
+        this.saldo = saldo;
+    }
+
     public String getTransacaoFormatada()
     {
-        //DecimalFormat doubleFormatador = new DecimalFormat("###,##0.00");
+
         
         DateTimeFormatter dateFormatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String space = "                 ";
@@ -40,6 +48,9 @@ public class Transacao
 
     @Override
     public String toString() {
-
+        DateTimeFormatter dateFormatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String[] bagulhos;
+        bagulhos = new String[]{data.format(dateFormatador), descricao, Double.toString(valor), Character.toString(tipoOperacao),  Double.toString(saldo)};
+        return String.join(";", bagulhos);
     }
 }
