@@ -34,7 +34,7 @@ public class ContaBancariaDaoRam
     
     public ContaBancaria read( int numero )
     {
-        ContaBancaria contaProcurada = new ContaBancaria(numero,null,0,null);
+        ContaBancaria contaProcurada = new ContaBancaria(numero,null,0);
         ContaBancaria contaRetorno = null;
         int index = listaContas.indexOf(contaProcurada);
         if (index >= 0)

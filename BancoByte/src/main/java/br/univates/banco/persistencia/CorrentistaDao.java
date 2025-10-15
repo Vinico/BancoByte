@@ -9,7 +9,7 @@ import java.util.Collections;
 
 public class CorrentistaDao
 {
-    private final String path = "db\\correntista.dat";
+    private final String path = "db/correntista.dat";
 
     public CorrentistaDao()
     {

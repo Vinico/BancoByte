@@ -72,6 +72,6 @@ public class Correntista implements Comparable<Correntista>
 
     @Override
     public String toString() {
-        return this.getCpfFormatado() + ";" + this.nome + ";" + this.municipio;
+        return this.getCpf().getNumeroCpf() + ";" + this.nome + ";" + this.municipio;
     }
 }

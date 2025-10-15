@@ -8,6 +8,8 @@ import br.univates.banco.negocio.ContaBancaria;
 import br.univates.banco.negocio.SaldoInsuficienteException;
 import br.univates.banco.negocio.Transacao;
 import br.univates.banco.negocio.ValorNegativoException;
+import br.univates.banco.persistencia.TransacaoDao;
+
 import java.util.ArrayList;
 
 public class TelaContaBancaria
@@ -102,7 +104,7 @@ public class TelaContaBancaria
             {
                 System.out.println("** Extrato bancário **");
                 System.out.println("DATA       DESCRIÇÃO                  VALOR            SALDO");
-                ArrayList<Transacao> listaTransacoes = conta.getListaTransacoes();
+                ArrayList<Transacao> listaTransacoes = new TransacaoDao().getTransacoes(String.valueOf(conta.getNumero()));
                 for (Transacao t: listaTransacoes)
                 {
                     System.out.println(t.getTransacaoFormatada());

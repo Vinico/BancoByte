@@ -4,7 +4,9 @@
  */
 package br.univates.banco.apresentacao;
 
+import br.univates.alexandria.Cpf;
 import br.univates.alexandria.Entrada;
+import br.univates.alexandria.InvalidEntryException;
 import br.univates.alexandria.menu2.Menu;
 import br.univates.alexandria.menu2.MenuItem;
 import br.univates.banco.negocio.ContaBancaria;
@@ -74,10 +76,27 @@ public class TelaPrincipal
                 System.out.println();
             }
         });
+
+        m.addItem(new MenuItem('p', "Cadastrar Conta") {
+            @Override
+            public void executar() {
+                ContaBancariaDao dao = new ContaBancariaDao();
+                CorrentistaDao correDao = new CorrentistaDao();
+                String cpfToCad = Entrada.leiaString("Digite o cpf do correntista a ser cadastrado: ");
+                try {
+                    ContaBancaria conta = new ContaBancaria(correDao.read(new Cpf(cpfToCad, true)));
+                    dao.create(conta);
+                } catch (InvalidEntryException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         
         m.gerarMenu();
         
     }
+
+
     
     /*
     public void exibir()

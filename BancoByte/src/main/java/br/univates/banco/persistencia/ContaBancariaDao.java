@@ -9,10 +9,10 @@ import br.univates.banco.negocio.Correntista;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ContaBancariaDao
+public class ContaBancariaDao // fazer uma funcao pra update e adicionar pra cada função da conta em si
 {
-    ArrayList<ContaBancaria> listaContas = new ArrayList<>();
-    private final String path = "db\\contabancaria.dat";
+
+    private final String path = "db/contabancaria.dat";
 
     public ContaBancariaDao()
     {
@@ -36,7 +36,8 @@ public class ContaBancariaDao
     
     public ContaBancaria read( int numero )
     {
-        ContaBancaria contaProcurada = new ContaBancaria(numero,null,0,null);
+        ArrayList<ContaBancaria> listaContas = readAll();
+        ContaBancaria contaProcurada = new ContaBancaria(numero,null,0);
         ContaBancaria contaRetorno = null;
         int index = listaContas.indexOf(contaProcurada);
         if (index >= 0)
@@ -45,17 +46,46 @@ public class ContaBancariaDao
         }
         return contaRetorno;
     }
+
+    public void update(ContaBancaria conta){
+        ArrayList<ContaBancaria> listaContas = readAll();
+
+        Arquivo a = new Arquivo(path);
+        if (a.abrirEscrita())
+        {
+            for (ContaBancaria c: listaContas)
+            {
+                if (c.getNumero() == conta.getNumero())
+                a.escreverLinha( conta.toString() );
+            }
+        }
+        a.fecharArquivo();
+    }
     
     
     public void create( ContaBancaria conta )
     {
+        ArrayList<ContaBancaria> listaContas = readAll();
         listaContas.add(conta);
+
+
+        Arquivo a = new Arquivo(path);
+        if (a.abrirEscrita())
+        {
+            for (ContaBancaria c: listaContas)
+            {
+                a.escreverLinha( c.toString() );
+            }
+        }
+        a.fecharArquivo();
     }
     
     public ArrayList<ContaBancaria> readAll()
     {
         ArrayList<ContaBancaria> listaContas = new ArrayList<ContaBancaria>();
         Arquivo a = new Arquivo(path);
+        CorrentistaDao dao = new CorrentistaDao();
+        TransacaoDao transacaoDao = new TransacaoDao();
         a.abrirLeitura();
 
 
@@ -63,8 +93,15 @@ public class ContaBancariaDao
         while (linha != null) {
             if (!linha.isEmpty()) {
                 String[] splis = linha.split(";");
-                Arquivo t = new Arquivo();
-                listaContas.add(new ContaBancaria());
+                Correntista corre;
+                try {
+                    corre = dao.read(new Cpf(splis[1], true));
+                } catch (InvalidEntryException e) {
+                    throw new RuntimeException(e);
+                }
+                int numero =  Integer.parseInt(splis[0]);
+
+                listaContas.add(new ContaBancaria(numero, corre, Double.parseDouble(splis[2])));
             }
             linha = a.lerLinha();
         }

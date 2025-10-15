@@ -12,9 +12,9 @@ public class ContaBancariaEspecial extends ContaBancaria
         this.limite = 1000;
     }
 
-    public ContaBancariaEspecial(int numero, Correntista correntista, double saldo, ArrayList<Transacao> transacoes, double limite)
+    public ContaBancariaEspecial(int numero, Correntista correntista, double saldo, double limite)
     {
-        super(numero, correntista, saldo, transacoes);
+        super(numero, correntista, saldo);
         this.limite = 1000;
         this.setLimite(limite);
     }
@@ -42,7 +42,7 @@ public class ContaBancariaEspecial extends ContaBancaria
         if (this.saldo + this.limite - valor >=0)
         {
             this.saldo -= valor;
-            this.listaTransacoes.add( new Transacao(descricao,valor,'D',this.saldo) );
+            trasDao.create(new Transacao(descricao,valor,'D',this.saldo), String.valueOf(super.getNumero()));
         }
         else
         {
