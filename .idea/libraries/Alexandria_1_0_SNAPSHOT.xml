@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Alexandria-1.0-SNAPSHOT">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../Alexandria/Alexandria/target/Alexandria-1.0-SNAPSHOT.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
