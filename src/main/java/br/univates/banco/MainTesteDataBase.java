@@ -5,6 +5,7 @@ import br.univates.alexandria.InvalidEntryException;
 import br.univates.alexandria.persistence.DataBaseConnectionManager;
 import br.univates.alexandria.persistence.DataBaseException;
 import br.univates.banco.negocio.Correntista;
+import br.univates.banco.persistencia.CorrentistaDao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,41 +13,21 @@ import java.sql.SQLException;
 public class MainTesteDataBase {
     public static void main(String[] args) {
 
-        DataBaseConnectionManager db;
-
-        try {
-            db = new DataBaseConnectionManager(
-                    DataBaseConnectionManager.POSTGRESQL,
-                    "bancobyte",
-                    "vinicius",
-                    "123456");
-
-
-            db.connectionTest();
-            db.connectDataBase();
-
-            ResultSet rs = db.runQuerySQL("SELECT * FROM correntista");
-
-            if (rs.isBeforeFirst()) {
-                while (rs.next()) {
-                    String cpf = rs.getString("cpf");
-                    String nome = rs.getString("nome");
-                    String municipio = rs.getString("municipio");
-
-                    Correntista corre = new Correntista(new Cpf(cpf), nome, municipio);
-                    System.out.println("Correntista: " + nome + " (" + cpf + "), " + municipio);
-                }
-            }
-            db.closeConnection();
-
-        } catch (DataBaseException e) {
-            System.out.println("Deu pau");
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        CorrentistaDao dao = new CorrentistaDao();
+        /*try {
+            dao.create(new Correntista(new Cpf("05950052099"), "alexsandro", "Canudos do vale"));
         } catch (InvalidEntryException e) {
             throw new RuntimeException(e);
+        }*/
+
+        Correntista corre = null;
+        try {
+            corre = new Correntista(new Cpf("05950052099"), "alexsandro", "Canudos do vale");
+        } catch (InvalidEntryException e) {
+            dao.delete(corre);
+            throw new RuntimeException(e);
         }
+//        System.out.println(corre.toString());
 
 
     }
