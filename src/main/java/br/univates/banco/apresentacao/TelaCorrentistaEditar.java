@@ -4,7 +4,7 @@ import br.univates.alexandria.Cpf;
 import br.univates.alexandria.Entrada;
 import br.univates.alexandria.InvalidEntryException;
 import br.univates.banco.negocio.Correntista;
-import br.univates.banco.persistencia.CorrentistaDao;
+import br.univates.banco.persistencia.CorrentistaDaoPostgres;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +15,7 @@ public class TelaCorrentistaEditar
     {
         String cpf = Entrada.leiaString("CPF: ");
 
-        CorrentistaDao dao = new CorrentistaDao();
+        CorrentistaDaoPostgres dao = new CorrentistaDaoPostgres();
         Correntista correntista = dao.read(cpf);
 
         if (correntista != null)

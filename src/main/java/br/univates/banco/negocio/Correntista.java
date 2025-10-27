@@ -39,7 +39,7 @@ public class Correntista implements Comparable<Correntista>
 
     public void setNome(String nome)
     {
-        if (!nome.isBlank())
+        if (!nome.trim().isEmpty())
         {
             this.nome = nome;
         }
@@ -52,7 +52,7 @@ public class Correntista implements Comparable<Correntista>
 
     public void setMunicipio(String municipio)
     {
-        if (!municipio.isBlank())
+        if (!municipio.trim().isEmpty())
         {
             this.municipio = municipio;
         }

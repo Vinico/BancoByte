@@ -8,7 +8,7 @@ import br.univates.banco.negocio.ContaBancaria;
 import br.univates.banco.negocio.SaldoInsuficienteException;
 import br.univates.banco.negocio.Transacao;
 import br.univates.banco.negocio.ValorNegativoException;
-import br.univates.banco.persistencia.ContaBancariaDao;
+import br.univates.banco.persistencia.ContaBancariaDaoPostgres;
 import java.util.ArrayList;
 
 public class TelaContaBancariaMovimentar
@@ -24,7 +24,7 @@ public class TelaContaBancariaMovimentar
     {
         Menu m = new Menu();
         m.setTitulo("Autoatendimento do Banco Byte\n\nConta de: "+conta.getCorrentista().getNome());
-        m.addItem( new MenuItem('d', "Depositar", new MenuProcedimento()
+        m.addItem(new MenuItem('d', "Depositar", new MenuProcedimento()
         {
             @Override
             public void executarProcedimento()
@@ -34,7 +34,7 @@ public class TelaContaBancariaMovimentar
                     double valor = Entrada.leiaDouble("Valor do depósito: ");            
                     conta.depositar(valor);
                     
-                    ContaBancariaDao dao = new ContaBancariaDao();
+                    ContaBancariaDaoPostgres dao = new ContaBancariaDaoPostgres();
                     dao.update(conta);
                     
                     System.out.println("Operação realizada");
@@ -47,7 +47,7 @@ public class TelaContaBancariaMovimentar
         } ));
         
         
-        m.addItem( new MenuItem('s',"Sacar", new MenuProcedimento()
+        m.addItem(new MenuItem('s',"Sacar", new MenuProcedimento()
         {
             @Override
             public void executarProcedimento()
@@ -57,7 +57,7 @@ public class TelaContaBancariaMovimentar
                     double valor = Entrada.leiaDouble("Valor do saque: ");
                     conta.sacar(valor);
                     
-                    ContaBancariaDao dao = new ContaBancariaDao();
+                    ContaBancariaDaoPostgres dao = new ContaBancariaDaoPostgres();
                     dao.update(conta);
                     
                     System.out.println("Operação realizada");
@@ -73,7 +73,7 @@ public class TelaContaBancariaMovimentar
             }
         }));
         
-        m.addItem( new MenuItem('p',"Fazer pix", new MenuProcedimento()
+        m.addItem(new MenuItem('p',"Fazer pix", new MenuProcedimento()
         {
             @Override
             public void executarProcedimento()
@@ -83,7 +83,7 @@ public class TelaContaBancariaMovimentar
                     double valor = Entrada.leiaDouble("Valor do pix: ");
                     conta.fazerPix(valor);
                     
-                    ContaBancariaDao dao = new ContaBancariaDao();
+                    ContaBancariaDaoPostgres dao = new ContaBancariaDaoPostgres();
                     dao.update(conta);
                     
                     System.out.println("Operação realizada");

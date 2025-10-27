@@ -1,8 +1,6 @@
 package br.univates.banco.persistencia;
 
 import br.univates.alexandria.Arquivo;
-import br.univates.alexandria.Cpf;
-import br.univates.alexandria.InvalidEntryException;
 import br.univates.banco.negocio.ContaBancaria;
 import br.univates.banco.negocio.ContaBancariaEspecial;
 import br.univates.banco.negocio.Correntista;
@@ -21,7 +19,8 @@ public class ContaBancariaDaoArquivo
         {
             try
             {
-                ContaBancaria.setSequencial( this.readAll().getLast().getNumero() );
+                ArrayList<ContaBancaria> lista = readAll();
+                ContaBancaria.setSequencial( lista.get( lista.size()-1 ).getNumero() );
             }
             catch (NoSuchElementException e)
             {
@@ -109,7 +108,7 @@ public class ContaBancariaDaoArquivo
                 if (campo[0].charAt(0) == ContaBancaria.TIPO_SIMPLES )
                 {
                     conta = new ContaBancaria( numeroConta, 
-                                               new CorrentistaDao().read( campo[2] ),
+                                               new CorrentistaDaoPostgres().read( campo[2] ),
                                                Double.parseDouble( campo[3] ),
                                                listaTransacoes );
                     listaContas.add(conta);
@@ -117,7 +116,7 @@ public class ContaBancariaDaoArquivo
                 else //ContaBancaria.TIPO_ESPECIAL 
                 {
                     conta = new ContaBancariaEspecial( numeroConta, 
-                                               new CorrentistaDao().read( campo[2] ),
+                                               new CorrentistaDaoPostgres().read( campo[2] ),
                                                Double.parseDouble( campo[3] ),
                                                listaTransacoes,
                                                Double.parseDouble( campo[4] ));

@@ -3,6 +3,7 @@ package br.univates.banco;
 import br.univates.alexandria.persistence.DataBaseConnectionManager;
 import br.univates.alexandria.persistence.DataBaseException;
 import br.univates.banco.apresentacao.TelaMenuPrincipal;
+import br.univates.banco.persistencia.ContaBancariaDaoPostgres;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,21 +20,21 @@ public class Main
         try
         {
             DataBaseConnectionManager db = new DataBaseConnectionManager( DataBaseConnectionManager.POSTGRESQL,
-                    "bancobyte", "postgres", "postgres");
+                    "bancobyte", "vinicius", "123456");
             db.connectionTest();
+            
+            new ContaBancariaDaoPostgres(); // carregar número da conta
         
             TelaMenuPrincipal tela = new TelaMenuPrincipal();
             tela.exibir(); 
-
-            System.exit(0);
-        
         } 
         catch (DataBaseException ex)
         {
             System.out.println("Não conectou com o banco de dados");
         }
-        
-        
-        
+        finally
+        {
+            System.exit(0);
+        }
     }
 }

@@ -6,8 +6,8 @@ import br.univates.alexandria.InvalidEntryException;
 import br.univates.banco.negocio.ContaBancaria;
 import br.univates.banco.negocio.ContaBancariaEspecial;
 import br.univates.banco.negocio.Correntista;
-import br.univates.banco.persistencia.ContaBancariaDao;
-import br.univates.banco.persistencia.CorrentistaDao;
+import br.univates.banco.persistencia.ContaBancariaDaoPostgres;
+import br.univates.banco.persistencia.CorrentistaDaoPostgres;
 
 public class TelaContaBancariaCriar
 {
@@ -26,7 +26,7 @@ public class TelaContaBancariaCriar
             {
                 cpf = Entrada.leiaString("CPF Correntista: ",cpf);
                 
-                CorrentistaDao dao = new CorrentistaDao();
+                CorrentistaDaoPostgres dao = new CorrentistaDaoPostgres();
                 Correntista correntista = dao.read( new Cpf(cpf) );
                 
                 if (correntista != null)
@@ -41,7 +41,7 @@ public class TelaContaBancariaCriar
                     {
                         conta = new ContaBancaria(correntista);
                     }
-                    ContaBancariaDao daoConta = new ContaBancariaDao();
+                    ContaBancariaDaoPostgres daoConta = new ContaBancariaDaoPostgres();
                     daoConta.create(conta);
                 
                     repetir = false;

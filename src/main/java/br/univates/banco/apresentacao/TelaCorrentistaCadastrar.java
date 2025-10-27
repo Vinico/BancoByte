@@ -4,7 +4,7 @@ import br.univates.alexandria.Cpf;
 import br.univates.alexandria.Entrada;
 import br.univates.alexandria.InvalidEntryException;
 import br.univates.banco.negocio.Correntista;
-import br.univates.banco.persistencia.CorrentistaDao;
+import br.univates.banco.persistencia.CorrentistaDaoPostgres;
 
 public class TelaCorrentistaCadastrar
 {
@@ -25,7 +25,7 @@ public class TelaCorrentistaCadastrar
                 cidade = Entrada.leiaString("Cidade: ",cidade);
 
                 Correntista correntista = new Correntista( new Cpf(cpf), nome, cidade );
-                CorrentistaDao dao = new CorrentistaDao();
+                CorrentistaDaoPostgres dao = new CorrentistaDaoPostgres();
                 dao.create(correntista);
                 
                 repetir = false;

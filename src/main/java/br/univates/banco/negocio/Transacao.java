@@ -3,7 +3,6 @@ package br.univates.banco.negocio;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 
 public class Transacao
 {
@@ -54,6 +53,32 @@ public class Transacao
         DateTimeFormatter dateFormatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return this.data.format(dateFormatador)+";"+this.descricao+";"+this.valor+";"+this.tipoOperacao+";"+this.saldo;
     }
+
+    public LocalDate getData()
+    {
+        return data;
+    }
+
+    public String getDescricao()
+    {
+        return descricao;
+    }
+
+    public double getValor()
+    {
+        return valor;
+    }
+
+    public char getTipoOperacao()
+    {
+        return tipoOperacao;
+    }
+
+    public double getSaldo()
+    {
+        return saldo;
+    }
+    
     
     
 }

@@ -2,8 +2,8 @@ package br.univates.banco.apresentacao;
 
 import br.univates.banco.negocio.ContaBancaria;
 import br.univates.banco.negocio.Correntista;
-import br.univates.banco.persistencia.ContaBancariaDao;
-import br.univates.banco.persistencia.CorrentistaDao;
+import br.univates.banco.persistencia.ContaBancariaDaoPostgres;
+import br.univates.banco.persistencia.CorrentistaDaoPostgres;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class TelaContaBancariaListar
     public void exibir()
     {
         DecimalFormat doubleFormatador = new DecimalFormat("###,##0.00");
-        ContaBancariaDao dao = new ContaBancariaDao();
+        ContaBancariaDaoPostgres dao = new ContaBancariaDaoPostgres();
         ArrayList<ContaBancaria> lista = dao.readAll();
         for (ContaBancaria c: lista)
         {

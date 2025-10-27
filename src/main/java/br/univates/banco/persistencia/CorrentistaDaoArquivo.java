@@ -73,7 +73,7 @@ public class CorrentistaDaoArquivo
     public void delete(Correntista correntista)
     {
         // verificação de integridade contralada diretamente pelo sistema
-        ContaBancariaDao dao = new ContaBancariaDao();
+        ContaBancariaDaoPostgres dao = new ContaBancariaDaoPostgres();
         ArrayList<ContaBancaria> listaContas = dao.readAll(correntista);
         
         if (listaContas.size() == 0) // só pode deletar se não tem conta bancária

@@ -8,7 +8,7 @@ import br.univates.alexandria.Entrada;
 import br.univates.alexandria.menu2.Menu;
 import br.univates.alexandria.menu2.MenuItem;
 import br.univates.banco.negocio.ContaBancaria;
-import br.univates.banco.persistencia.ContaBancariaDao;
+import br.univates.banco.persistencia.ContaBancariaDaoPostgres;
 
 /**
  *

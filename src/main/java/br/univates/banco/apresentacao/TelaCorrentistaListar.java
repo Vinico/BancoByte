@@ -1,7 +1,7 @@
 package br.univates.banco.apresentacao;
 
 import br.univates.banco.negocio.Correntista;
-import br.univates.banco.persistencia.CorrentistaDao;
+import br.univates.banco.persistencia.CorrentistaDaoPostgres;
 import java.util.ArrayList;
 
 public class TelaCorrentistaListar
@@ -9,7 +9,7 @@ public class TelaCorrentistaListar
     
     public void exibir()
     {
-        CorrentistaDao dao = new CorrentistaDao();
+        CorrentistaDaoPostgres dao = new CorrentistaDaoPostgres();
         ArrayList<Correntista> lista = dao.readAll();
         for (Correntista c: lista)
         {

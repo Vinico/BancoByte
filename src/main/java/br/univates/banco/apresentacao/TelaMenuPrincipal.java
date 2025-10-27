@@ -8,7 +8,7 @@ import br.univates.alexandria.Entrada;
 import br.univates.alexandria.menu2.Menu;
 import br.univates.alexandria.menu2.MenuItem;
 import br.univates.banco.negocio.ContaBancaria;
-import br.univates.banco.persistencia.ContaBancariaDao;
+import br.univates.banco.persistencia.ContaBancariaDaoPostgres;
 
 /**
  *
@@ -25,14 +25,14 @@ public class TelaMenuPrincipal
     {
         Menu m = new Menu();
         
-        m.addItem( new MenuItem( 'a',"Autoatendimento")
+        m.addItem(new MenuItem( 'a',"Autoatendimento")
         {
             @Override
             public void executar()
             {
                 int numero = Entrada.leiaInt("Digite o número da conta corrente:");
                 
-                ContaBancariaDao dao = new ContaBancariaDao();
+                ContaBancariaDaoPostgres dao = new ContaBancariaDaoPostgres();
                 
                 ContaBancaria conta = dao.read(numero);
                 if (conta != null)
