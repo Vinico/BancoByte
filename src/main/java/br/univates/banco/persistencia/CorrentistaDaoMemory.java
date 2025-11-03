@@ -2,12 +2,14 @@ package br.univates.banco.persistencia;
 
 import br.univates.alexandria.Cpf;
 import br.univates.alexandria.InvalidEntryException;
+import br.univates.alexandria.persistence.Filter;
+import br.univates.alexandria.persistence.IDao;
 import br.univates.banco.negocio.ContaBancaria;
 import br.univates.banco.negocio.Correntista;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CorrentistaDaoMemory
+public class CorrentistaDaoMemory implements IDao<Correntista,String>
 {
     private static ArrayList<Correntista> listaCorrentistas;
 
@@ -58,7 +60,12 @@ public class CorrentistaDaoMemory
     {
         // verificação de integridade contralada diretamente pelo sistema
         ContaBancariaDaoPostgres dao = new ContaBancariaDaoPostgres();
-        ArrayList<ContaBancaria> listaContas = dao.readAll(correntista);
+        ArrayList<ContaBancaria> listaContas = dao.readAll(new Filter<ContaBancaria>() {
+            @Override
+            public boolean isAccept(ContaBancaria contaBancaria) {
+                return contaBancaria.getCorrentista().equals(correntista);
+            }
+        });
         
         if (listaContas.size() == 0) // só pode deletar se não tem conta bancária
         {
@@ -87,6 +94,20 @@ public class CorrentistaDaoMemory
         Collections.sort(listaCorrentistas);
         return listaCorrentistas;
     }
+
+    @Override
+    public ArrayList<Correntista> readAll(Filter<Correntista> filtro)
+    {
+        ArrayList<Correntista> listaParcial = new ArrayList();
+        ArrayList<Correntista> listaCompleta = this.readAll();
+        for (Correntista c: listaCompleta)
+        {
+            if (filtro.isAccept(c))
+            {
+                listaParcial.add(c);
+            }
+        }
+        return listaParcial;}
     
     
 }

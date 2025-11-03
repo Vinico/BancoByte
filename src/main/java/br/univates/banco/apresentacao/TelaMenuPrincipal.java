@@ -7,8 +7,12 @@ package br.univates.banco.apresentacao;
 import br.univates.alexandria.Entrada;
 import br.univates.alexandria.menu2.Menu;
 import br.univates.alexandria.menu2.MenuItem;
+import br.univates.alexandria.persistence.IDao;
+import br.univates.alexandria.persistence.RecordNotFoundException;
 import br.univates.banco.negocio.ContaBancaria;
+import br.univates.banco.negocio.Correntista;
 import br.univates.banco.persistencia.ContaBancariaDaoPostgres;
+import br.univates.banco.persistencia.DaoFactory;
 
 /**
  *
@@ -31,10 +35,15 @@ public class TelaMenuPrincipal
             public void executar()
             {
                 int numero = Entrada.leiaInt("Digite o número da conta corrente:");
-                
-                ContaBancariaDaoPostgres dao = new ContaBancariaDaoPostgres();
-                
-                ContaBancaria conta = dao.read(numero);
+
+                IDao<ContaBancaria, Integer> daoConta = DaoFactory.createContaBancariaDao();
+
+                ContaBancaria conta = null;
+                try {
+                    conta = daoConta.read(numero);
+                } catch (RecordNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 if (conta != null)
                 {
                     TelaContaBancariaMovimentar tela = new TelaContaBancariaMovimentar( conta );

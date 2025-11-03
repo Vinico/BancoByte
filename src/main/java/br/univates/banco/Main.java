@@ -20,7 +20,7 @@ public class Main
         try
         {
             DataBaseConnectionManager db = new DataBaseConnectionManager( DataBaseConnectionManager.POSTGRESQL,
-                    "bancobyte", "vinicius", "123456");
+                    "bancobyte", "postgres", "postgres");
             db.connectionTest();
             
             new ContaBancariaDaoPostgres(); // carregar número da conta
