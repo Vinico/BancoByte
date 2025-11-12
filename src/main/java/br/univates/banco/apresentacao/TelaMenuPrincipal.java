@@ -42,7 +42,7 @@ public class TelaMenuPrincipal
                 try {
                     conta = daoConta.read(numero);
                 } catch (RecordNotFoundException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("Conta não achada");
                 }
                 if (conta != null)
                 {

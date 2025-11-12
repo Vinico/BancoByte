@@ -252,7 +252,7 @@ public class ContaBancariaDaoPostgres implements IDao<ContaBancaria, Integer>
 
     @Override
     public void delete(ContaBancaria contaBancaria) throws RecordNotFoundException {
-
+        
     }
     
    /* public ContaBancaria read( int numero )

@@ -41,9 +41,9 @@ public class Transacao
         DecimalFormat doubleFormatador = new DecimalFormat("###,##0.00");
         DateTimeFormatter dateFormatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         
-        return this.data.format(dateFormatador)+ " " +String.format("%-21s",this.descricao)+"\t"+
-               String.format("%10s",doubleFormatador.format(this.valor)+this.tipoOperacao)+"\t"+
-               String.format("%10s",doubleFormatador.format(this.saldo)); 
+        return this.data.format(dateFormatador)+ " " +String.format("%-5s",this.descricao)+"\t"+
+               String.format("%10s","R$"+doubleFormatador.format(this.valor)+" "+this.tipoOperacao)+"\t"+
+               String.format("%10s","R$"+doubleFormatador.format(this.saldo));
         
         
     }

@@ -36,7 +36,7 @@ public class TelaContaBancariaCriar
             try {
                 correntista = daoCorre.read(cpf);
             } catch (RecordNotFoundException e) {
-                throw new RuntimeException(e);
+                System.out.println("Conta não achada");
             }
 
 

@@ -57,7 +57,7 @@ public class TelaContaBancariaMovimentar {
                 } catch (SaldoInsuficienteException ex) {
                     System.out.println("Não há saldo suficiente");
                 } catch (RecordNotFoundException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("Conta não achada");
                 }
             }
         }));

@@ -128,7 +128,7 @@ public class CorrentistaDaoArquivo implements IDao<Correntista,String>
                 } 
                 catch (InvalidEntryException ex)
                 {
-                    // correntista ignorado caso CPF sejá inválido. Fato que espera-se que não ocorra.
+                    System.out.println("CPF Inválido");
                 }
 
                 linha = a.lerLinha();

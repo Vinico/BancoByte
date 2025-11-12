@@ -42,7 +42,7 @@ public class TelaCorrentistaEditar
             try {
                 daoCorre.update(correntista);
             } catch (RecordNotFoundException e) {
-                throw new RuntimeException(e);
+                System.out.println("Conta não achada");
             }
         }
         else
